@@ -3,11 +3,13 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.BookController;
+
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
 public class MainWindow extends JFrame {
 
@@ -24,16 +26,18 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnNewButton = new JButton("Empréstimos");
-		JButton btnNewButton_1 = new JButton("Livros");
+		JButton btnBooksLoan = new JButton("Empréstimos");
+		btnBooksLoan.setName("btnBooksLoan");
+		JButton btnBooks = new JButton("Livros");
+		btnBooks.setName("btnBooks");
 		JButton btnNewButton_2 = new JButton("Clientes");
 		
-		btnNewButton.addActionListener(new HandleButtonClick());
-		btnNewButton_1.addActionListener(new HandleButtonClick());
+		btnBooksLoan.addActionListener(new HandleButtonClick());
+		btnBooks.addActionListener(new HandleButtonClick());
 		btnNewButton_2.addActionListener(new HandleButtonClick());
 		
-		contentPane.add(btnNewButton);
-		contentPane.add(btnNewButton_1);
+		contentPane.add(btnBooksLoan);
+		contentPane.add(btnBooks);
 		contentPane.add(btnNewButton_2);
 	}
 	
@@ -43,7 +47,12 @@ public class MainWindow extends JFrame {
 	private class HandleButtonClick implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			JButton clickedButton = ((JButton) event.getSource());
-			System.out.println("Você clicou em: " + clickedButton.getText());
+			System.out.println("Você clicou em: " + clickedButton.getName());
+			
+			if (clickedButton.getName() == "btnBooks") {
+				System.out.println("Creating book");
+				BookController.getInstance().createBook("Livro #1");
+			}
 		}
 	}
 
