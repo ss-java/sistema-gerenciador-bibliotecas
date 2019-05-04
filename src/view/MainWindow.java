@@ -11,7 +11,25 @@ import java.awt.event.ActionEvent;
 
 public class MainWindow extends JFrame {
 
+	/**
+	 * Window.
+	 */
 	private JPanel contentPane;
+	
+	/**
+	 * Button that leads to Loans screen.
+	 */
+	private JButton btnBooksLoan;
+	
+	/**
+	 * Button that leads to Books screen.
+	 */
+	private JButton btnBooks;
+	
+	/**
+	 * Button that leads to Customers screen.
+	 */
+	private JButton btnCustomers;
 
 	/**
 	 * Create the frame.
@@ -24,19 +42,22 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		setContentPane(contentPane);
 
-		JButton btnBooksLoan = new JButton("Empréstimos");
+		btnBooksLoan = new JButton("Empréstimos");
 		btnBooksLoan.setName("btnBooksLoan");
-		JButton btnBooks = new JButton("Livros");
+		
+		btnBooks = new JButton("Livros");
 		btnBooks.setName("btnBooks");
-		JButton btnNewButton_2 = new JButton("Clientes");
+		
+		btnCustomers = new JButton("Clientes");
+		btnCustomers.setName("btnCustomers");
 
 		btnBooksLoan.addActionListener(new HandleButtonClick());
 		btnBooks.addActionListener(new HandleButtonClick());
-		btnNewButton_2.addActionListener(new HandleButtonClick());
+		btnCustomers.addActionListener(new HandleButtonClick());
 
 		contentPane.add(btnBooksLoan);
 		contentPane.add(btnBooks);
-		contentPane.add(btnNewButton_2);
+		contentPane.add(btnCustomers);
 	}
 
 	/**
