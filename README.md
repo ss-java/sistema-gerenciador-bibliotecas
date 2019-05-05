@@ -2,9 +2,10 @@
 Este sistema é resultado de um trabalho prático aplicado na disciplina de Arquitetura de Softwares. A disciplina faz parte da grade curricular do curso de Ciência da Computação, do Centro de Universitário de Belo Horizonte, lecionada pelo professor Flávio Henrique Batista de Souza.
 
 ## 1. Detalhes do planejamento
-Para este trabalho optamos por usar o Trello ao invés das issues do GitHub. Isso porque o Trello possui algumas funcionalidades a mais, como a possibilidade de estipular o prazo de cada tarefa - crucial para este trabalho.
+Para este trabalho optamos por usar o próprio sistema de [**Projetos**](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/projects/1) do GitHub.
 
-O board no Trello pode ser [encontrado aqui](https://trello.com/b/36gaLQJR/sistema-gerenciador-de-bibliotecas). Ele é público.
+## 2. Contribuindo com o projeto
+Se você faz parte do time de desenvolvimento, comece lendo a [Wiki](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki). Se você já está familiarizado com o Git e GitHub, nem precisa ler as páginas 1 e 2. Pode começar [configurando o projeto](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki/5.-Configurando-o-projeto-na-m%C3%A1quina-local) e lendo [os padrões Git do projeto](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki/3.-Normas-de-uso-do-Git).
 
 ## 2. Sobre o trabalho
 ### 2.1. Regras
