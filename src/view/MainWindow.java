@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,6 +32,22 @@ public class MainWindow extends JFrame {
 	 * Button that leads to Customers screen.
 	 */
 	private JButton btnCustomers;
+	
+	/**
+	 * Open the window.
+	 */
+	public static void open() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					(new MainWindow()).setVisible(true);
+				} catch (Exception e) {
+					System.err.println("Couldn't open the " + getClass().getName());
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -67,10 +85,17 @@ public class MainWindow extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 			JButton clickedButton = ((JButton) event.getSource());
 			System.out.println("Você clicou em: " + clickedButton.getName());
-
+			
 			if (clickedButton.getName() == "btnBooks") {
-				System.out.println("Creating book");
-				BookController.getInstance().createBook("Livro #1");
+				BooksWindow.open();
+			}
+			
+			else if (clickedButton.getName() == "btnCustomers") {
+				CustomersWindow.open();
+			}
+			
+			else if (clickedButton.getName() == "btnBooksLoan") {
+				LoansWindow.open();
 			}
 		}
 	}
