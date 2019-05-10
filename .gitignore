@@ -25,3 +25,7 @@ hs_err_pid*
 # Others
 /bin/
 biblioteca.db
+
+# NetBeans project
+/nbproject/private/
+/build/
