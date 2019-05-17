@@ -1,5 +1,5 @@
 # Sistema Gerenciador de Bibliotecas
-Este sistema é resultado de um trabalho prático aplicado na disciplina de Arquitetura de Softwares. A disciplina faz parte da grade curricular do curso de Ciência da Computação, do Centro de Universitário de Belo Horizonte, lecionada pelo professor Flávio Henrique Batista de Souza.
+Este sistema é resultado de um trabalho prático aplicado na disciplina de Arquitetura de Softwares. A disciplina faz parte da grade curricular do curso de Ciência da Computação, do Centro de Universitário de Belo Horizonte, lecionada pelo professor [Flávio Henrique Batista de Souza](http://lattes.cnpq.br/4111795897515753).
 
 ## 1. Detalhes do planejamento
 Para este trabalho optamos por usar o próprio sistema de [**Projetos**](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/projects/1) do GitHub.
