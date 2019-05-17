@@ -34,6 +34,11 @@ public class MainWindow extends JFrame {
 	private JButton btnCustomers;
 	
 	/**
+	 * Button that close the application.
+	 */
+	private JButton btnExit;
+	
+	/**
 	 * Open the window.
 	 */
 	public static void open() {
@@ -54,13 +59,13 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 727, 528);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		setContentPane(contentPane);
 
-		btnBooksLoan = new JButton("EmprÃ©stimos");
+		btnBooksLoan = new JButton("Empréstimos");
 		btnBooksLoan.setName("btnBooksLoan");
 		
 		btnBooks = new JButton("Livros");
@@ -68,14 +73,19 @@ public class MainWindow extends JFrame {
 		
 		btnCustomers = new JButton("Clientes");
 		btnCustomers.setName("btnCustomers");
+		
+		btnExit = new JButton("Close application");
+		btnExit.setName("btnExit");
 
 		btnBooksLoan.addActionListener(new HandleButtonClick());
 		btnBooks.addActionListener(new HandleButtonClick());
 		btnCustomers.addActionListener(new HandleButtonClick());
+		btnExit.addActionListener(new HandleButtonClick());
 
 		contentPane.add(btnBooksLoan);
 		contentPane.add(btnBooks);
 		contentPane.add(btnCustomers);
+		contentPane.add(btnExit);
 	}
 
 	/**
@@ -84,7 +94,7 @@ public class MainWindow extends JFrame {
 	private class HandleButtonClick implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			JButton clickedButton = ((JButton) event.getSource());
-			System.out.println("VocÃª clicou em: " + clickedButton.getName());
+			System.out.println("Você clicou em: " + clickedButton.getName());
 			
 			if (clickedButton.getName() == "btnBooks") {
 				BooksWindow.open();
@@ -96,6 +106,10 @@ public class MainWindow extends JFrame {
 			
 			else if (clickedButton.getName() == "btnBooksLoan") {
 				LoansWindow.open();
+			}
+			
+			else if(clickedButton.getName() == "btnExit") {
+				System.exit(0);
 			}
 		}
 	}
