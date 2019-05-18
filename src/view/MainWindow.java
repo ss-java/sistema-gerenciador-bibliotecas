@@ -64,13 +64,14 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 830, 506);
+
+		setBounds(100, 100, 727, 528);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		btnBooksLoan = new JButton("Empr\u00E9stimos");
-		btnBooksLoan.setBounds(12, 10, 115, 36);
+		btnBooksLoan = new JButton("Empréstimos");
 		btnBooksLoan.setName("btnBooksLoan");
 		
 		btnBooks = new JButton("Livros");
@@ -81,15 +82,15 @@ public class MainWindow extends JFrame {
 		btnCustomers.setBounds(271, 10, 92, 36);
 		btnCustomers.setName("btnCustomers");
 		
-		btnExit = new JButton("Close Application");
-		btnExit.setBounds(401, 10, 175, 36);
+		btnExit = new JButton("Close application");
 		btnExit.setName("btnExit");
-				
+
+		
 		btnBooksLoan.addActionListener(new HandleButtonClick());
 		btnBooks.addActionListener(new HandleButtonClick());
 		btnCustomers.addActionListener(new HandleButtonClick());
 		btnExit.addActionListener(new HandleButtonClick());
-		contentPane.setLayout(null);
+
 
 		contentPane.add(btnBooksLoan);
 		contentPane.add(btnBooks);
@@ -117,7 +118,7 @@ public class MainWindow extends JFrame {
 				LoansWindow.open();
 			}
 			
-			else if (clickedButton.getName() == "btnExit") {
+			else if(clickedButton.getName() == "btnExit") {
 				System.exit(0);
 			}
 		}
