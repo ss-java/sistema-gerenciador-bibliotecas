@@ -4,12 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.CustomerController;
+import model.DatabaseConnection;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
@@ -57,7 +64,30 @@ public class CustomersWindow extends JFrame {
 		btnNewButton.setBounds(269, 438, 161, 38);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso! \nNome: " + textField.getText());
+				try {
+					if(textField.getText().isEmpty() || textField.getText().startsWith(" ")) {
+						JOptionPane.showMessageDialog(null, "O nome do Cliente não pode estar vazio");
+						throw new Exception("O nome Cliente vazio");	
+					}				
+					else	{
+						
+						
+						new CustomerController().createCustomer(textField.getText());  
+						Connection connection = DatabaseConnection.getInstance().getConnection();
+						Statement statement = connection.createStatement();
+						ResultSet rs = statement.executeQuery("Select * from customers");
+						while(rs.next()) {
+							String t = rs.getString("name");
+							System.out.println(t);
+						}
+						System.out.println(statement.getResultSet().toString());
+						JOptionPane.showMessageDialog(null, "Cliente Cadastrado com sucesso\nCliente: " + textField.getText());
+					}
+					
+				}catch(Exception ex) {
+					System.err.println(ex.getMessage());
+				}
+
 			}
 		});
 		windowPanel.setLayout(null);

@@ -65,11 +65,8 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		setContentPane(contentPane);
 
-<<<<<<< HEAD
 		btnBooksLoan = new JButton("Empréstimos");
-=======
-		btnBooksLoan = new JButton("Emprestimos");
->>>>>>> 004817b84c7d3b04e529ead2c8eb3600d98027f4
+
 		btnBooksLoan.setName("btnBooksLoan");
 		
 		btnBooks = new JButton("Livros");
