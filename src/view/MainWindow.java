@@ -10,36 +10,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JFormattedTextField;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.Color;
-import javax.swing.JEditorPane;
-import javax.swing.JToggleButton;
-import javax.swing.JTable;
-import javax.swing.JScrollBar;
-import javax.swing.JSpinner;
-import javax.swing.JLayeredPane;
-import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JList;
-import java.awt.Panel;
-import java.awt.Choice;
-import java.awt.Font;
-import java.awt.List;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import java.awt.Label;
-import javax.swing.border.LineBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.TextArea;
-import javax.swing.JComboBox;
-import javax.swing.AbstractListModel;
 
 public class MainWindow extends JFrame {
 

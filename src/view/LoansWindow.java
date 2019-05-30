@@ -13,10 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import controller.BookController;
+import controller.CustomerController;
 import controller.LoanController;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -82,7 +86,6 @@ public class LoansWindow extends JFrame {
 		panel.add(lblCliente);
 
 		JComboBox cbLivro = new JComboBox();
-		cbLivro.setBackground(Color.WHITE);
 		cbLivro.setBounds(10, 33, 346, 23);
 		panel.add(cbLivro);
 
@@ -130,11 +133,17 @@ public class LoansWindow extends JFrame {
 		btnEditar.setBounds(10, 11, 89, 23);
 		panel_2.add(btnEditar);
 		
+		//CARREGA LIVROS E CLIENTES
+		ArrayList<String> clientes = (new CustomerController()).loadCustomers();
+		for(int i = 0; i < clientes.size(); i++) {
+			cbCliente.addItem(clientes.get(i));
+		}
 		
-		
-		
-		
-		
+		ArrayList<String> livros = (new BookController()).loadBooks();
+		for(int i = 0; i < livros.size(); i++) {
+			cbLivro.addItem(livros.get(i));
+		}
+		//FIM
 		
 	}
 }
