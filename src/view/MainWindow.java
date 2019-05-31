@@ -66,6 +66,7 @@ public class MainWindow extends JFrame {
 		setContentPane(contentPane);
 
 		btnBooksLoan = new JButton("Empréstimos");
+
 		btnBooksLoan.setName("btnBooksLoan");
 		
 		btnBooks = new JButton("Livros");

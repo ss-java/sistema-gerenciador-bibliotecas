@@ -35,7 +35,7 @@ public class CustomerController {
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS customers (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING)");
 			
 			/* Create customer */
-			statement.executeUpdate("INSERT INTO customers(name) VALUES('" + name + "')");
+			statement.executeUpdate("INSERT INTO customers(name) VALUES('" + name + "')");			
 		} catch (SQLException ex) {
 			System.err.println("Couldn't get statement: " + ex.getMessage());
 		}
