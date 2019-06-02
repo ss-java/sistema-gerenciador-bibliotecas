@@ -1,17 +1,21 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import controller.CustomerController;
@@ -27,6 +31,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 public class CustomersWindow extends JFrame {
 
 	/**
@@ -34,8 +42,10 @@ public class CustomersWindow extends JFrame {
 	 */
 	private JPanel windowPanel;
 	private JTextField textField;
-	private JTable table;
-	
+	static JTable table = new JTable(1,1);;
+	static Connection connection = DatabaseConnection.getInstance().getConnection();
+	static ArrayList<String> colunaNomes = new ArrayList<>();
+	static DefaultTableModel model = (DefaultTableModel) table.getModel();
 	/**
 	 * Open the window.
 	 */
@@ -43,7 +53,18 @@ public class CustomersWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Statement statement = connection.createStatement();
+					ResultSet rs = statement.executeQuery("Select name from customers");
+										
+					while(rs.next()) {				
+						colunaNomes.add(rs.getString("name"));						
+					}
+					for(String nome : colunaNomes){
+						model.addRow(new String[] {nome});						
+					}				
+					
 					(new CustomersWindow()).setVisible(true);
+					
 					
 				} catch (Exception e) {
 					System.err.println("Couldn't open the " + getClass().getName());
@@ -75,26 +96,25 @@ public class CustomersWindow extends JFrame {
 		JButton btnAdicionar = new JButton("Adicionar");
 		
 		JButton btnSalvar = new JButton("Salvar");
+
+		JScrollPane scroll = new JScrollPane();
 		
-		table = new JTable();
+
+		scroll.setViewportView(table);
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					
+					
+					
 					if(textField.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "O nome do Cliente n„o pode estar vazio");
+						JOptionPane.showMessageDialog(null, "O nome do Cliente n√£o pode estar vazio");
 						throw new Exception("O nome Cliente vazio");	
 					}				
 					else	{												
-						new CustomerController().createCustomer(textField.getText());  
-						Connection connection = DatabaseConnection.getInstance().getConnection();
-						Statement statement = connection.createStatement();
-						ResultSet rs = statement.executeQuery("Select name from customers");
-						while(rs.next()) {							
-							String t = rs.getString("name");
-							System.out.println(t);
-						}
-						System.out.println(statement.getResultSet().toString());
+						new CustomerController().createCustomer(textField.getText());
+						model.addRow(new String[] {textField.getText()});	
 						JOptionPane.showMessageDialog(null, "Cliente Cadastrado com sucesso\nCliente: " + textField.getText());
 					}										
 				}catch(Exception ex) {
