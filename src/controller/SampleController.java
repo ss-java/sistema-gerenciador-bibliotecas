@@ -34,14 +34,6 @@ public class SampleController {
 		try {
 			Statement statement = connection.createStatement();
 			
-			/* Create table "samples" if it doesn't exist */
-			statement.executeUpdate(""
-				+ "CREATE TABLE IF NOT EXISTS samples ("
-				+ "	id INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ "	name STRING "
-				+ ")"
-			);
-			
 			/* Create sample record and add it into the "samples" table */
 			statement.executeUpdate(""
 				+ "INSERT INTO samples(name)"
@@ -60,6 +52,14 @@ public class SampleController {
 		
 		try {
 			Statement statement = connection.createStatement();
+			
+			/* Create table "samples" if it doesn't exist */
+			statement.executeUpdate(""
+				+ "CREATE TABLE IF NOT EXISTS samples ("
+				+ "	id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ "	name STRING "
+				+ ")"
+			);
 			
 			/* Carrega todas as informacoes do banco de dados */
 			return statement.executeQuery("SELECT * FROM samples");
