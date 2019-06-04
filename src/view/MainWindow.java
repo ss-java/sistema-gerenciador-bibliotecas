@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
 	/**
 	 * Button that close the application.
 	 */
-	private JButton btnExit;
+	private JButton btnSampleWindow;
 	
 	/**
 	 * Open the window.
@@ -65,7 +65,7 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		setContentPane(contentPane);
 
-		btnBooksLoan = new JButton("Empréstimos");
+		btnBooksLoan = new JButton("Emprestimos");
 		btnBooksLoan.setName("btnBooksLoan");
 		
 		btnBooks = new JButton("Livros");
@@ -74,18 +74,18 @@ public class MainWindow extends JFrame {
 		btnCustomers = new JButton("Clientes");
 		btnCustomers.setName("btnCustomers");
 		
-		btnExit = new JButton("Close application");
-		btnExit.setName("btnExit");
+		btnSampleWindow = new JButton("Janela de exemplo");
+		btnSampleWindow.setName("btnSampleWindow");
 
 		btnBooksLoan.addActionListener(new HandleButtonClick());
 		btnBooks.addActionListener(new HandleButtonClick());
 		btnCustomers.addActionListener(new HandleButtonClick());
-		btnExit.addActionListener(new HandleButtonClick());
+		btnSampleWindow.addActionListener(new HandleButtonClick());
 
 		contentPane.add(btnBooksLoan);
 		contentPane.add(btnBooks);
 		contentPane.add(btnCustomers);
-		contentPane.add(btnExit);
+		contentPane.add(btnSampleWindow);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class MainWindow extends JFrame {
 	private class HandleButtonClick implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			JButton clickedButton = ((JButton) event.getSource());
-			System.out.println("Você clicou em: " + clickedButton.getName());
+			System.out.println("Voce clicou em: " + clickedButton.getName());
 			
 			if (clickedButton.getName() == "btnBooks") {
 				BooksWindow.open();
@@ -108,8 +108,8 @@ public class MainWindow extends JFrame {
 				LoansWindow.open();
 			}
 			
-			else if(clickedButton.getName() == "btnExit") {
-				System.exit(0);
+			else if(clickedButton.getName() == "btnSampleWindow") {
+				SampleWindow.open();
 			}
 		}
 	}
