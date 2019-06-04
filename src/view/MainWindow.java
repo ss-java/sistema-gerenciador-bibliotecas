@@ -10,11 +10,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JEditorPane;
-import javax.swing.JList;
-import javax.swing.JTextArea;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame {
 
@@ -64,33 +59,28 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		setBounds(100, 100, 727, 528);
-
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		setContentPane(contentPane);
 
 		btnBooksLoan = new JButton("Emprestimos");
 		btnBooksLoan.setName("btnBooksLoan");
 		
 		btnBooks = new JButton("Livros");
-		btnBooks.setBounds(150, 10, 84, 36);
 		btnBooks.setName("btnBooks");
 		
 		btnCustomers = new JButton("Clientes");
-		btnCustomers.setBounds(271, 10, 92, 36);
 		btnCustomers.setName("btnCustomers");
 		
 		btnSampleWindow = new JButton("Janela de exemplo");
 		btnSampleWindow.setName("btnSampleWindow");
 
-		
 		btnBooksLoan.addActionListener(new HandleButtonClick());
 		btnBooks.addActionListener(new HandleButtonClick());
 		btnCustomers.addActionListener(new HandleButtonClick());
 		btnSampleWindow.addActionListener(new HandleButtonClick());
-
 
 		contentPane.add(btnBooksLoan);
 		contentPane.add(btnBooks);
@@ -123,4 +113,5 @@ public class MainWindow extends JFrame {
 			}
 		}
 	}
+	
 }
