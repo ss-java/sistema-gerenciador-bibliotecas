@@ -5,13 +5,13 @@ Este sistema é resultado de um trabalho prático aplicado na disciplina de Arqu
 Para este trabalho optamos por usar o próprio sistema de [**Projetos**](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/projects/1) do GitHub.
 
 ## 2. Contribuindo com o projeto
-Se você faz parte do time de desenvolvimento, comece lendo a [Wiki](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki). Se você já está familiarizado com o Git e GitHub, nem precisa ler as páginas 1 e 2. Pode começar [configurando o projeto](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki/5.-Configurando-o-projeto-na-m%C3%A1quina-local) e lendo [os padrões Git do projeto](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki/3.-Normas-de-uso-do-Git).
+Se você faz parte do time de desenvolvimento, comece lendo a [Wiki](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki). Se você já está familiarizado com o Git e GitHub, nem precisa ler as páginas sobre ambos. Pode só [configurar o projeto](https://github.com/stanley-java-projects/sistema-gerenciador-bibliotecas/wiki/1.-Configurando-o-projeto-na-m%C3%A1quina-local).
 
 ## 2. Sobre o trabalho
 ### 2.1. Regras
-1. Cada grupo deve ser composto de no máximo 4 pessoas. O grupo deve possuir **apenas** 1 (um) Arquiteto de Software.
+1. Cada grupo deve ser composto de no máximo 5 pessoas. O grupo deve possuir **apenas** 1 (um) Arquiteto de Software.
 2. O grupo pode escolher ou criar um projeto do zero, ou escolher um projeto já existente. O tema é livre.
-3. Todos os padrões ensinados na disciplina são válidos (GoF, MVC, MVVC, Dependency Injection, etc.).
+3. Todos os padrões ensinados na disciplina são válidos (Padrões GoF, MVC, MVVC, Dependency Injection, etc.).
 
 ### 2.2. Forma de apresentação
 1. O Arquiteto deve se apresentar, descrever a aplicação, sua funcionalidade, o tipo de dados que são tratados e os resultados que o software gerencia.
