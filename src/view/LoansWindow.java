@@ -42,11 +42,14 @@ public class LoansWindow extends JFrame {
 	 */
 	private JTable tblData;
 	
+	/**
+	 * ComboBox de livros e clientes
+	 */
 	JComboBox cbLivros = new JComboBox();
 	JComboBox cbClientes = new JComboBox();
 	
-	ArrayList<Book> books;
-	ArrayList<Customer> customers;
+	ArrayList<Book> books = new ArrayList();
+	ArrayList<Customer> customers = new ArrayList();
 	
 	/**
 	 * Os dados da tabela. A classe "DefaultTableModel" 
@@ -93,14 +96,12 @@ public class LoansWindow extends JFrame {
 	 * Cria a area com o formulario.
 	 */
 	private void buildFormArea() {
-		// Cria o painel com as bordas para separar 
-		// o conteudo visualmente
+		
 		JPanel formPanel = new JPanel();
 		formPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		formPanel.setBounds(12, 12, 370, 494);
 		formPanel.setLayout(null);
 		
-		// Cria o label em cima do campo de texto
 		JLabel lblLivro = new JLabel("Livro");
 		lblLivro.setBounds(12, 12, 107, 15);
 		formPanel.add(lblLivro);
@@ -109,30 +110,54 @@ public class LoansWindow extends JFrame {
 		lblCliente.setBounds(12, 70, 107, 15);
 		formPanel.add(lblCliente);
 		
-		// Adiciona os elementos na tela. So chamar 
-		// "new" nao eh o suficiente. Precisamos incluir 
-		// os elementos que criamos na janela chamando 
-		// "#add()".
 		contentPane.add(formPanel);
-		
-		
+				
 		cbLivros.setBounds(12, 38, 314, 20);
 		formPanel.add(cbLivros);
+		
+		/**
+		 * Alimenta o comboBox de livros.
+		 */
 		ResultSet data = BookController.getInstance().getAllBooks();
 		try {
 			while (data.next()) {
-				cbLivros.addItem(data.getString("name"));
+				Integer bookId  = data.getInt("id");
+				String bookName = data.getString("name");
+				cbLivros.addItem(bookName);
+				
+				Book book = new Book();
+				book.setId(bookId);
+				book.setName(bookName);
+											
+				books.add(book);
+				
 			}
-		} catch(SQLException e) {}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 		cbClientes.setBounds(12, 91, 314, 20);
 		formPanel.add(cbClientes);
+		
+		/**
+		 * Alimenta o comboBox de clientes.
+		 */
 		data = CustomerController.getInstance().getAllCustomers();
 		try {
 			while (data.next()) {
-				cbClientes.addItem(data.getString("name"));
+				Integer customerId  = data.getInt("id");
+				String customerName = data.getString("name");
+				cbClientes.addItem(customerName);
+				
+				Customer customer = new Customer();
+				customer.setId(customerId);
+				customer.setName(customerName);
+				
+				customers.add(customer);
 			}
-		} catch(SQLException e) {}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -177,6 +202,9 @@ public class LoansWindow extends JFrame {
 		// eh.
 		tblData = new JTable(records);
 		
+		JLabel lblListaEmprestimos = new JLabel("Lista de Emprestimos");
+		lblListaEmprestimos.setBounds(598, 12, 140, 15);
+		
 		// Adicionamos as colunas da tabela. Perceba que 
 		// as colunas sao adicionadas no espelho e nao na 
 		// instancia do JTable em si.
@@ -189,10 +217,11 @@ public class LoansWindow extends JFrame {
 		// precisa, manualmente, dizer que quer criar uma barra de 
 		// rolagem para um determinado componente.
 		JScrollPane scrlDataTable = new JScrollPane(tblData);
-		scrlDataTable.setBounds(394, 12, 512, 546);
+		scrlDataTable.setBounds(394, 37, 512, 521);
 		scrlDataTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		contentPane.add(scrlDataTable);
+		contentPane.add(lblListaEmprestimos);
 	}
 	
 	/**
@@ -203,29 +232,16 @@ public class LoansWindow extends JFrame {
 		ResultSet data = LoanController.getInstance().getAllLoans();
 		try {
 			while (data.next()) {
-				Integer bookId = data.getInt("bookId");
-				String bookName = data.getString("bookName");
-				
-				Integer customerId = data.getInt("customerId");
+				String bookName     = data.getString("bookName");
 				String customerName = data.getString("customerName");
-				
-				
+								
 				Object[] record = new Object[] { bookName, customerName };
 				records.addRow(record);
-				
-				Book book = new Book();
-				book.setId(bookId);
-				book.setName(bookName);
-				
-				Customer customer = new Customer();
-				customer.setId(customerId);
-				customer.setName(customerName);
-				
-				books.add(book);
-				customers.add(customer);
-				
+											
 			}
-		} catch(SQLException e) {}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -233,14 +249,26 @@ public class LoansWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
+			if (books.isEmpty() || customers.isEmpty()) {
+				System.out.println("Livro ou cliente não selecionado!");
+				return;				
+			}
+							
 			Book book = books.get(cbLivros.getSelectedIndex());
 			Customer customer = customers.get(cbClientes.getSelectedIndex());
-			if (books.isEmpty())
-				return;
 			
+			boolean successLoan = LoanController.getInstance().createLoan(book, customer);
 			
-			LoanController.getInstance().createLoan(book, customer);
-
+			/**
+			 * Deve ser implementado um método para atualização
+			 * toda vez que emprestar um livro. O código abaixo é
+			 * provisório. Boa noite rs.
+			 */
+			if(successLoan) {
+				Object[] record = new Object[] { book.getName(), customer.getName() };
+				records.addRow(record);
+			};
+			
 		}
 	}
 }
