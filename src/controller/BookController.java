@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -39,5 +40,20 @@ public class BookController {
 		} catch (SQLException ex) {
 			System.err.println("Couldn't get statement: " + ex.getMessage());
 		}
+	}
+	
+	public ResultSet getAllBooks() {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		
+		try {
+			Statement statement = connection.createStatement();
+			
+			/* Carrega todas as informacoes do banco de dados */
+			return statement.executeQuery("SELECT name FROM books");
+		} catch (SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+		
+		return null;
 	}
 }
