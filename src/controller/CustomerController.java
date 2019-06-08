@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -38,6 +39,53 @@ public class CustomerController {
 			statement.executeUpdate("INSERT INTO customers(name) VALUES('" + name + "')");			
 		} catch (SQLException ex) {
 			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+	}
+	
+	public ResultSet getAllSamples() {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		
+		try {
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate(""
+				+ "CREATE TABLE IF NOT EXISTS CUSTOMERS ("
+				+ "	id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ "	name STRING "
+				+ ")"
+			);
+			
+			return statement.executeQuery("SELECT * FROM CUSTOMERS");
+		} catch (SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+		
+		return null;
+	}
+	
+	public void deleteCustomers(int id) {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		
+		try {
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate("DELETE CUSTOMERS WHERE ID = " + id);
+			
+		} catch (SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+	}
+	
+	public void editCustomers(int id, String name) {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		
+		try {
+			Statement statement = connection.createStatement();			
+			
+			statement.executeUpdate("UPDATE CUSTOMERS SET NAME = " + name + "WHERE ID = " + id);
+			
+		}catch(SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());			
 		}
 	}
 }
