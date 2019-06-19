@@ -63,4 +63,22 @@ public class BookController {
 		
 		return null;
 	}
+	
+	public ResultSet getAllBooks() {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		
+		try {
+			Statement statement = connection.createStatement();
+			
+			/* Create table "books" if it doesn't exist */
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING)");
+			
+			/* Carrega todas as informacoes do banco de dados */
+			return statement.executeQuery("SELECT * FROM books");
+		} catch (SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+		
+		return null;
+	}
 }

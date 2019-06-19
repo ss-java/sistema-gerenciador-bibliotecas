@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -39,5 +40,23 @@ public class CustomerController {
 		} catch (SQLException ex) {
 			System.err.println("Couldn't get statement: " + ex.getMessage());
 		}
+	}
+	
+	public ResultSet getAllCustomers() {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		
+		try {
+			Statement statement = connection.createStatement();
+			
+			/* Create table "customers" if it doesn't exist */
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS customers (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING)");
+			
+			/* Carrega todas as informacoes do banco de dados */
+			return statement.executeQuery("SELECT * FROM customers");
+		} catch (SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+		
+		return null;
 	}
 }
