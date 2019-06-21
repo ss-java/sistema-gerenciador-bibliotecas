@@ -95,7 +95,7 @@ public class CustomersWindow extends JFrame {
 		formPanel.setBounds(12, 12, 370, 494);
 		formPanel.setLayout(null);
 		
-		JLabel lblSample = new JLabel("Label do campo");
+		JLabel lblSample = new JLabel("Nome do Cliente");
 		lblSample.setBounds(12, 12, 107, 15);
 		formPanel.add(lblSample);
 	
@@ -148,10 +148,12 @@ public class CustomersWindow extends JFrame {
 	private void populateDataTable() {
 		ResultSet data = CustomerController.getInstance().getAllCustomers();
 		try {
+			tableModel.setRowCount(0);
 			while (data.next()) {
 				Object[] model = new Object[] { data.getInt("id"), data.getString("name") };
 				tableModel.addRow(model);
 			}
+			tableModel.setColumnCount(2);
 		} catch(SQLException e) {}		
 	}
 

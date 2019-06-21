@@ -43,18 +43,19 @@ public class CustomerController {
 	}
 	
 	public ResultSet getAllCustomers() {
+
 		Connection connection = DatabaseConnection.getInstance().getConnection();
 		
 		try {
 			Statement statement = connection.createStatement();
-			
+			/* Create table "customers" if it doesn't exist */
 			statement.executeUpdate(""
 				+ "CREATE TABLE IF NOT EXISTS CUSTOMERS ("
 				+ "	id INTEGER PRIMARY KEY AUTOINCREMENT, "
 				+ "	name STRING "
 				+ ")"
 			);
-			
+			/* Carrega todas as informacoes do banco de dados */
 			return statement.executeQuery("SELECT * FROM CUSTOMERS");
 		} catch (SQLException ex) {
 			System.err.println("Couldn't get statement: " + ex.getMessage());
@@ -69,7 +70,7 @@ public class CustomerController {
 		try {
 			Statement statement = connection.createStatement();
 			
-			statement.executeUpdate("DELETE CUSTOMERS WHERE ID = " + id);
+			statement.executeUpdate("DELETE FROM CUSTOMERS WHERE ID = " + id);
 			
 		} catch (SQLException ex) {
 			System.err.println("Couldn't get statement: " + ex.getMessage());
