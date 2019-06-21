@@ -146,7 +146,7 @@ public class CustomersWindow extends JFrame {
 	}
 	
 	private void populateDataTable() {
-		ResultSet data = CustomerController.getInstance().getAllSamples();
+		ResultSet data = CustomerController.getInstance().getAllCustomers();
 		try {
 			while (data.next()) {
 				Object[] model = new Object[] { data.getInt("id"), data.getString("name") };
