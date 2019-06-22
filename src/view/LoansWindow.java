@@ -24,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 import controller.BookController;
 import controller.CustomerController;
 import controller.LoanController;
-import controller.SampleController;
 import model.Book;
 import model.Customer;
 
@@ -96,24 +95,20 @@ public class LoansWindow extends JFrame {
 	 * Cria a area com o formulario.
 	 */
 	private void buildFormArea() {
-		
-		JPanel formPanel = new JPanel();
-		formPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		formPanel.setBounds(12, 12, 370, 494);
-		formPanel.setLayout(null);
+		BorderFacade border = new BorderFacade();
 		
 		JLabel lblLivro = new JLabel("Livro");
 		lblLivro.setBounds(12, 12, 107, 15);
-		formPanel.add(lblLivro);
+		border.add(lblLivro);
 		
 		JLabel lblCliente = new JLabel("Cliente");
 		lblCliente.setBounds(12, 70, 107, 15);
-		formPanel.add(lblCliente);
+		border.add(lblCliente);
 		
-		contentPane.add(formPanel);
+		contentPane.add(border.getPanel());
 				
 		cbLivros.setBounds(12, 38, 314, 20);
-		formPanel.add(cbLivros);
+		border.add(cbLivros);
 		
 		/**
 		 * Alimenta o comboBox de livros.
@@ -137,7 +132,7 @@ public class LoansWindow extends JFrame {
 		}
 		
 		cbClientes.setBounds(12, 91, 314, 20);
-		formPanel.add(cbClientes);
+		border.add(cbClientes);
 		
 		/**
 		 * Alimenta o comboBox de clientes.
