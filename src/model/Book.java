@@ -1,11 +1,15 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class Book {
 	/**
 	 * Identifier.
 	 */
 	private int id;
-	
+
 	/**
 	 * Name.
 	 */
@@ -37,5 +41,17 @@ public class Book {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void save() {
+		Connection connection = DatabaseConnection.getInstance().getConnection();
+		try {
+			Statement statement = connection.createStatement();
+			/* Create book record and add it into the "books" table */
+			statement.executeUpdate("" + "INSERT INTO books(name)" + "VALUES('" + name + "')");
+		} catch (SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());
+		}
+
 	}
 }
