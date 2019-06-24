@@ -49,8 +49,9 @@ public class CustomersWindow extends JFrame {
 	private JPanel windowPanel;
 	private JTextField textField;
 	private JTable table;
-	static Connection connection = DatabaseConnection.getInstance().getConnection();
 	static DefaultTableModel tableModel = new DefaultTableModel();
+	
+	public WindowCustomersState state = new WindowCustomersState().getInstance();
 	/**
 	 * Open the window.
 	 */
@@ -125,8 +126,8 @@ public class CustomersWindow extends JFrame {
 		windowPanel.add(buttonsPanel);
 		
 		btnSave.addActionListener(new SaveButtonListener());
-		//btnAdd.addActionListener(arg0);
-		//btnEdit.addActionListener(l);
+		btnAdd.addActionListener(new AddButtonListener());
+		btnEdit.addActionListener(new EditButtonListener());
 		//btnDelete.addActionListener(l);
 		
 	}
@@ -161,11 +162,43 @@ public class CustomersWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			String name = textField.getText();
+
+			if (name.isEmpty())
+				return;
+			
+			state.OnSave(name);
+			
+			textField.setText(null);	
+			
+			new CustomersWindow().populateDataTable();
+		}
+	}
+	
+	private class AddButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			state.setState(new CustomersCreateWindowState());
+
+			String name = textField.getText();
 			
 			if (name.isEmpty())
 				return;
 			
-			CustomerController.getInstance().createCustomer(name);
+			textField.setText(null);	
+			
+			new CustomersWindow().populateDataTable();
+		}
+	}
+	
+	private class EditButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			state.setState(new CustomersEditWindowState());
+			
+			String name = textField.getText();
+			
+			if (name.isEmpty())
+				return;
 			
 			textField.setText(null);	
 			
