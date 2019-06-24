@@ -23,7 +23,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import controller.CustomerController;
-import controller.SampleController;
 import model.DatabaseConnection;
 
 import javax.swing.JTextField;
@@ -36,8 +35,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -90,21 +87,18 @@ public class CustomersWindow extends JFrame {
 	}
 
 	private void buildFormArea() {
-		JPanel formPanel = new JPanel();
-		formPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		formPanel.setBounds(12, 12, 370, 494);
-		formPanel.setLayout(null);
+		BorderFacade border = new BorderFacade();
 		
 		JLabel lblSample = new JLabel("Nome do Cliente");
 		lblSample.setBounds(12, 12, 107, 15);
-		formPanel.add(lblSample);
+		border.add(lblSample);
 	
 		textField = new JTextField();
 		textField.setBounds(12, 39, 306, 19);
 		textField.setColumns(10);
 		
-		windowPanel.add(formPanel);
-		formPanel.add(textField);
+		windowPanel.add(border.getPanel());
+		border.add(textField);
 	}
 	
 	private void buildButtonsArea() {

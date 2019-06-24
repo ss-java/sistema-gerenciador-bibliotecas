@@ -108,10 +108,6 @@ public class MainWindow extends JFrame {
 			else if (clickedButton.getName() == "btnBooksLoan") {
 				LoansWindow.open();
 			}
-			
-			else if(clickedButton.getName() == "btnSampleWindow") {
-				SampleWindow.open();
-			}
 		}
 	}
 	

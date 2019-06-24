@@ -95,15 +95,12 @@ public class BooksWindow extends JFrame {
 	private void buildFormArea() {
 		// Cria o painel com as bordas para separar 
 		// o conteudo visualmente
-		JPanel formPanel = new JPanel();
-		formPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		formPanel.setBounds(12, 12, 370, 494);
-		formPanel.setLayout(null);
+        BorderFacade border = new BorderFacade();
 		
 		// Cria o label em cima do campo de texto
 		JLabel lblSample = new JLabel("Nome do Livro: ");
 		lblSample.setBounds(12, 12, 107, 15);
-		formPanel.add(lblSample);
+                border.add(lblSample);
 		
 		// Cria o campo de texto
 		txtBooksName = new JTextField();
@@ -114,8 +111,8 @@ public class BooksWindow extends JFrame {
 		// "new" nao eh o suficiente. Precisamos incluir 
 		// os elementos que criamos na janela chamando 
 		// "#add()".
-		contentPane.add(formPanel);
-		formPanel.add(txtBooksName);
+		contentPane.add(border.getPanel());
+		border.add(txtBooksName);
 	}
 	
 	/**
