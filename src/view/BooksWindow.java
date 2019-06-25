@@ -46,7 +46,12 @@ public class BooksWindow extends JFrame {
 	 * dados.
 	 */
 	private DefaultTableModel records = new DefaultTableModel();
-
+	
+	/**
+	 * Objetos para o State Pattern
+	 */
+	WindowState currentState;
+	BooksWindow instance;
 	/**
 	 * Metodo chamado por outras classes sempre que 
 	 * elas desejam abrir essa janela.
@@ -75,6 +80,9 @@ public class BooksWindow extends JFrame {
 		buildButtonsArea();
 		buildDataTable();
 		populateDataTable();
+		
+		currentState = new BooksCreateWindowState();
+		instance = this;
 	}
 	
 	/**
@@ -179,7 +187,7 @@ public class BooksWindow extends JFrame {
 	 * monta todas elas na tabela de dados.
 	 */
 	private void populateDataTable() {
-		ResultSet data = BookController.getInstance().getAllSamples();
+		ResultSet data = BookController.getInstance().getAllBooks();
 		try {
 			while (data.next()) {
 				Object[] record = new Object[] { data.getInt("id"), data.getString("name") };
@@ -188,36 +196,33 @@ public class BooksWindow extends JFrame {
 		} catch(SQLException e) {}
 	}
 	
-	/**
-	 * Essa classe implementa o metodo "#actionPerformed".
-	 * Esse metodo eh chamado SEMPRE que o botao "Salvar" 
-	 * for clicado.
-	 * 
-	 * Sim, a classe SaveButtonListener eh criada DENTRO 
-	 * da classe SampleWindow. Isso faz com que essa classe 
-	 * apenas seja visivel dentro de SampleWindow.
-	 * 
-	 * Poderiamos criar em um arquivo separado? Sim. Mas como 
-	 * vamos usar essa classe somente dentro de SampleWindow, 
-	 * nao tem necessidade de torna-la acessivel para as outras 
-	 * classes tambem.
+	
+	public void createBook() {
+		// Pega o texto inserido no campo de texto "txtSampleName"
+		String name = txtBooksName.getText();
+		
+		// Se nenhum texto for digitado, simplesmente nao fazemos nada.
+		// No futuro, podemos mostrar uma mensagem de erro dizendo que 
+		// o campo eh obrigatorio.
+		if (name.isEmpty())
+			return;
+		
+		BookController.getInstance().createBook(name);
+		
+		// Limpa todos os campos
+		txtBooksName.setText(null);
+		
+		new BooksWindow().populateDataTable();
+	}
+	
+	/*
+	 * State Pattern
 	 */
 	private class SaveButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// Pega o texto inserido no campo de texto "txtSampleName"
-			String name = txtBooksName.getText();
+			currentState.onSave(instance);
 			
-			// Se nenhum texto for digitado, simplesmente nao fazemos nada.
-			// No futuro, podemos mostrar uma mensagem de erro dizendo que 
-			// o campo eh obrigatorio.
-			if (name.isEmpty())
-				return;
-			
-			BookController.getInstance().createBook(name);
-			
-			// Limpa todos os campos
-			txtBooksName.setText(null);
 		}
 	}
 }
