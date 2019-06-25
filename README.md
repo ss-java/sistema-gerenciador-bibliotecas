@@ -21,5 +21,9 @@ Se você faz parte do time de desenvolvimento, comece lendo a [Wiki](https://git
 * Explicar o padrão usado com base na teoria;
 * O membro da equipe que foi designado para otimização (explique: data, horário, prazo estipulado);
 * O que o Arquiteto espera obter de otimização ou padronização com o processo;
-3. Devem ser identificados pelo menos 6 otimizações/adequações baseadas em padrões. Cada elemento do grupo deve implementar pelo menos duas.
+3. Devem ser identificados pelo menos 8 otimizações/adequações baseadas em padrões. Cada elemento do grupo deve implementar pelo menos duas.
 4. Cada membro precisa ser **completamente** capaz de explicar suas implementações. Isso incluir dizer quais padrões implementou, quais os ganhos desses padrões e quais os custos identificados.
+
+## 3. Observações
+### 3.1. Os padrões podem ser implementados numa forma mais básica
+Como o projeto é pequeno e o seu maior intuito é permitir que o grupo inteiro aprenda mais sobre Padrões de Projeto, as implementações podem não ser completamente fiéis ou até mesmo não serem as mais ideais para cada problema. O principal intuito era prover uma introdução aos padrões, garantindo que cada desenvolvedor entendesse a sua necessidade após "viver o problema".
