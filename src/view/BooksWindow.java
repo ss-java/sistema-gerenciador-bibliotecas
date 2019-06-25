@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.BookController;
+import model.Book;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -46,6 +48,9 @@ public class BooksWindow extends JFrame {
 	 * dados.
 	 */
 	private DefaultTableModel records = new DefaultTableModel();
+	
+	
+	private ArrayList<Book> listBooks = new ArrayList<>();
 
 	/**
 	 * Metodo chamado por outras classes sempre que 
@@ -182,6 +187,13 @@ public class BooksWindow extends JFrame {
 		ResultSet data = BookController.getInstance().getAllSamples();
 		try {
 			while (data.next()) {
+				Book book = new Book();
+				
+				book.setId(data.getInt("id"));
+				book.setName(data.getString("name"));
+				
+				listBooks.add(book);
+				
 				Object[] record = new Object[] { data.getInt("id"), data.getString("name") };
 				records.addRow(record);
 			}
@@ -215,6 +227,16 @@ public class BooksWindow extends JFrame {
 				return;
 			
 			BookController.getInstance().createBook(name);
+			
+			Book book = new Book();
+			
+			book.setName(name);
+			book.setId(listBooks.size()+1);
+			
+			listBooks.add(book);
+			
+			Object[] record = new Object[] { book.getId(), book.getName() };
+			records.addRow(record);
 			
 			// Limpa todos os campos
 			txtBooksName.setText(null);
