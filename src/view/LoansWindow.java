@@ -26,6 +26,7 @@ import controller.CustomerController;
 import controller.LoanController;
 import model.Book;
 import model.Customer;
+import model.Loan;
 
 import javax.swing.JComboBox;
 
@@ -49,6 +50,7 @@ public class LoansWindow extends JFrame {
 	
 	ArrayList<Book> books = new ArrayList();
 	ArrayList<Customer> customers = new ArrayList();
+	ArrayList<Loan> listLoans = new ArrayList<>();
 	
 	/**
 	 * Os dados da tabela. A classe "DefaultTableModel" 
@@ -225,10 +227,12 @@ public class LoansWindow extends JFrame {
 	 */
 	private void populateDataTable() {
 		ResultSet data = LoanController.getInstance().getAllLoans();
+		
 		try {
 			while (data.next()) {
 				String bookName     = data.getString("bookName");
 				String customerName = data.getString("customerName");
+							
 								
 				Object[] record = new Object[] { bookName, customerName };
 				records.addRow(record);
@@ -252,18 +256,14 @@ public class LoansWindow extends JFrame {
 			Book book = books.get(cbLivros.getSelectedIndex());
 			Customer customer = customers.get(cbClientes.getSelectedIndex());
 			
-			boolean successLoan = LoanController.getInstance().createLoan(book, customer);
+			boolean sucessLoan = false;
 			
-			/**
-			 * Deve ser implementado um método para atualização
-			 * toda vez que emprestar um livro. O código abaixo é
-			 * provisório. Boa noite rs.
-			 */
-			if(successLoan) {
+			sucessLoan = LoanController.getInstance().createLoan(book, customer, sucessLoan);
+						
+			if(sucessLoan) {
 				Object[] record = new Object[] { book.getName(), customer.getName() };
 				records.addRow(record);
-			};
-			
+			}
 		}
 	}
 }
