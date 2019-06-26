@@ -50,8 +50,8 @@ public class BooksWindow extends JFrame {
 	/**
 	 * Objetos para o State Pattern
 	 */
-	WindowState currentState;
-	BooksWindow instance;
+	private WindowState currentState;
+	private BooksWindow instance;
 	/**
 	 * Metodo chamado por outras classes sempre que 
 	 * elas desejam abrir essa janela.
@@ -81,7 +81,7 @@ public class BooksWindow extends JFrame {
 		buildDataTable();
 		populateDataTable();
 		
-		currentState = new BooksCreateWindowState();
+		currentState = new BooksAddWindowState();
 		instance = this;
 	}
 	
@@ -106,9 +106,9 @@ public class BooksWindow extends JFrame {
         BorderFacade border = new BorderFacade();
 		
 		// Cria o label em cima do campo de texto
-		JLabel lblSample = new JLabel("Nome do Livro: ");
-		lblSample.setBounds(12, 12, 107, 15);
-                border.add(lblSample);
+		JLabel lblLivro = new JLabel("Nome do Livro: ");
+		lblLivro.setBounds(12, 12, 107, 15);
+        border.add(lblLivro);
 		
 		// Cria o campo de texto
 		txtBooksName = new JTextField();
@@ -150,6 +150,9 @@ public class BooksWindow extends JFrame {
 		// Aqui, informamos qual classe vai cuidar do 
 		// comportamento de cada botao.
 		btnSave.addActionListener(new SaveButtonListener());
+		btnAdd.addActionListener(new AddButtonListener());
+		btnEdit.addActionListener(new EditButtonListener());
+		btnDelete.addActionListener(new DeleteButtonListener());
 	}
 	
 	/**
@@ -215,6 +218,14 @@ public class BooksWindow extends JFrame {
 		new BooksWindow().populateDataTable();
 	}
 	
+	public void editBook() {
+		System.out.println("Livro editado");
+	}
+	
+	public void deleteBook() {
+		System.out.println("Livro deletado");
+	}
+	
 	/*
 	 * State Pattern
 	 */
@@ -222,6 +233,31 @@ public class BooksWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			currentState.onSave(instance);
+			
+		}
+	}
+	
+	private class AddButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			currentState = new BooksAddWindowState();
+			
+		}
+	}
+	
+	private class EditButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			currentState = new BooksEditWindowState();
+			
+		}
+	}
+	
+	private class DeleteButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			currentState = new BooksDeleteWindowState();
+			
 			
 		}
 	}

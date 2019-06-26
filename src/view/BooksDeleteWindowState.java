@@ -2,11 +2,11 @@ package view;
 
 import javax.swing.JFrame;
 
-public class BooksCreateWindowState implements WindowState{
-
+public class BooksDeleteWindowState implements WindowState{
+	
 	@Override
 	public void onSave(JFrame stateOwner) {
 		BooksWindow booksWindow = (BooksWindow) stateOwner;
-		booksWindow.createBook();
+		booksWindow.deleteBook();
 	}
 }

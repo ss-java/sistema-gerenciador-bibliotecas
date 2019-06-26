@@ -4,11 +4,14 @@ import controller.BookController;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class MainWindow extends JFrame {
@@ -59,7 +62,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 727, 528);
+		setBounds(1000, 500, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
@@ -74,19 +77,14 @@ public class MainWindow extends JFrame {
 		
 		btnCustomers = new JButton("Clientes");
 		btnCustomers.setName("btnCustomers");
-		
-		btnSampleWindow = new JButton("Janela de exemplo");
-		btnSampleWindow.setName("btnSampleWindow");
 
 		btnBooksLoan.addActionListener(new HandleButtonClick());
 		btnBooks.addActionListener(new HandleButtonClick());
 		btnCustomers.addActionListener(new HandleButtonClick());
-		btnSampleWindow.addActionListener(new HandleButtonClick());
 
 		contentPane.add(btnBooksLoan);
 		contentPane.add(btnBooks);
 		contentPane.add(btnCustomers);
-		contentPane.add(btnSampleWindow);
 	}
 
 	/**
