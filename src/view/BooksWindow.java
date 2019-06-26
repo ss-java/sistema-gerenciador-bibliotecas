@@ -184,15 +184,11 @@ public class BooksWindow extends JFrame {
 	 * monta todas elas na tabela de dados.
 	 */
 	private void populateDataTable() {
-		ResultSet data = BookController.getInstance().getAllSamples();
+		ResultSet data = BookController.getInstance().getAllBooks();
 		try {
 			while (data.next()) {
-				Book book = new Book();
 				
-				book.setId(data.getInt("id"));
-				book.setName(data.getString("name"));
-				
-				listBooks.add(book);
+				listBooks.add( BookController.getInstance().addBooks(data.getInt("id"), data.getString("name")));
 				
 				Object[] record = new Object[] { data.getInt("id"), data.getString("name") };
 				records.addRow(record);
@@ -226,17 +222,16 @@ public class BooksWindow extends JFrame {
 			if (name.isEmpty())
 				return;
 			
-			BookController.getInstance().createBook(name);
-			
-			Book book = new Book();
-			
-			book.setName(name);
-			book.setId(listBooks.size()+1);
-			
-			listBooks.add(book);
-			
-			Object[] record = new Object[] { book.getId(), book.getName() };
-			records.addRow(record);
+			// Verifica se já existe um livro com o mesmo nome já cadastrado
+			// Caso não encontre nenhum ele insere no banco de dados e na tabela da view.
+			if(BookController.getInstance().checkBook(listBooks, name)) {
+				BookController.getInstance().createBook(name);
+				
+				listBooks.add( BookController.getInstance().addBooks(listBooks.size()+1, name));
+				
+				Object[] record = new Object[] { listBooks.size(), name };
+				records.addRow(record);
+			}
 			
 			// Limpa todos os campos
 			txtBooksName.setText(null);
