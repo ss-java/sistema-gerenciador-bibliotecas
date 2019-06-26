@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.Book;
 import model.DatabaseConnection;
@@ -32,23 +33,34 @@ public class BookController {
 		book.setName(name);
 		book.save();
 	}
-
-	public ResultSet getAllSamples() {
-		Connection connection = DatabaseConnection.getInstance().getConnection();
-
-		try {
-			Statement statement = connection.createStatement();
-
-			statement.executeUpdate("" + "CREATE TABLE IF NOT EXISTS books ("
-					+ "	id INTEGER PRIMARY KEY AUTOINCREMENT, " + "	name STRING " + ")");
-
-			/* Carrega todas as informacoes do banco de dados */
-			return statement.executeQuery("SELECT * FROM books");
-		} catch (SQLException ex) {
-			System.err.println("Couldn't get statement: " + ex.getMessage());
+	
+	/**
+	 * 
+	 * Checks if the book you want to insert into the database is already registered.
+	 */
+	
+	public boolean checkBook(ArrayList<Book> l, String nameBook) {
+		for(Book book : l) {
+			if(book.getName().equals(nameBook)) {
+				System.out.println("Livro já cadastrado");
+				return false;
+			}
 		}
-
-		return null;
+		return true;
+	}
+	
+	
+	/** 
+	 * A method that assists in the insertion of new books. 
+	 */
+	
+	public Book addBooks(int id, String name) {
+		Book book = new Book();
+	
+		book.setId(id);
+		book.setName(name);
+	
+		return book;
 	}
 
 	public ResultSet getAllBooks() {
