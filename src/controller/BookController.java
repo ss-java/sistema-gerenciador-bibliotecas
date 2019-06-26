@@ -42,7 +42,7 @@ public class BookController {
 	public boolean checkBook(ArrayList<Book> l, String nameBook) {
 		for(Book book : l) {
 			if(book.getName().equals(nameBook)) {
-				System.out.println("Livro já cadastrado");
+				System.out.println("Livro jï¿½ cadastrado");
 				return false;
 			}
 		}

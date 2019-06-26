@@ -65,15 +65,16 @@ public class CustomerController {
 	}
 
 	public void editCustomers(int id, String name) {
+
 		Connection connection = DatabaseConnection.getInstance().getConnection();
 
 		try {
 			Statement statement = connection.createStatement();
 
-			statement.executeUpdate("UPDATE CUSTOMERS SET NAME = " + name + "WHERE ID = " + id);
-
-		} catch (SQLException ex) {
-			System.err.println("Couldn't get statement: " + ex.getMessage());
+			statement.executeUpdate("UPDATE CUSTOMERS SET NAME = '" + name + "' WHERE ID = " + id);
+			
+		}catch(SQLException ex) {
+			System.err.println("Couldn't get statement: " + ex.getMessage());			
 		}
 	}
 }

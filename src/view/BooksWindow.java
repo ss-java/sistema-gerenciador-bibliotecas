@@ -47,12 +47,16 @@ public class BooksWindow extends JFrame {
 	 * alterada, automaticamente atualizara a tabela de 
 	 * dados.
 	 */
-	private DefaultTableModel records = new DefaultTableModel();
-	
-	
+	private DefaultTableModel records = new DefaultTableModel();	
 	private ArrayList<Book> listBooks = new ArrayList<>();
 
 	/**
+	 * Objetos para o State Pattern
+	 */
+	WindowState currentState;
+	BooksWindow instance;
+
+  /**
 	 * Metodo chamado por outras classes sempre que 
 	 * elas desejam abrir essa janela.
 	 */
@@ -80,6 +84,9 @@ public class BooksWindow extends JFrame {
 		buildButtonsArea();
 		buildDataTable();
 		populateDataTable();
+		
+		currentState = new BooksCreateWindowState();
+		instance = this;
 	}
 	
 	/**
@@ -196,45 +203,33 @@ public class BooksWindow extends JFrame {
 		} catch(SQLException e) {}
 	}
 	
-	/**
-	 * Essa classe implementa o metodo "#actionPerformed".
-	 * Esse metodo eh chamado SEMPRE que o botao "Salvar" 
-	 * for clicado.
-	 * 
-	 * Sim, a classe SaveButtonListener eh criada DENTRO 
-	 * da classe SampleWindow. Isso faz com que essa classe 
-	 * apenas seja visivel dentro de SampleWindow.
-	 * 
-	 * Poderiamos criar em um arquivo separado? Sim. Mas como 
-	 * vamos usar essa classe somente dentro de SampleWindow, 
-	 * nao tem necessidade de torna-la acessivel para as outras 
-	 * classes tambem.
+	
+	public void createBook() {
+		// Pega o texto inserido no campo de texto "txtSampleName"
+		String name = txtBooksName.getText();
+		
+		// Se nenhum texto for digitado, simplesmente nao fazemos nada.
+		// No futuro, podemos mostrar uma mensagem de erro dizendo que 
+		// o campo eh obrigatorio.
+		if (name.isEmpty())
+			return;
+		
+    if (BookController.getInstance().checkBook(listBooks, name)) {
+      BookController.getInstance().createBook(name);
+
+      // Limpa todos os campos
+      txtBooksName.setText(null);
+		
+  		populateDataTable();
+	}
+	
+	/*
+	 * State Pattern
 	 */
 	private class SaveButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// Pega o texto inserido no campo de texto "txtSampleName"
-			String name = txtBooksName.getText();
-			
-			// Se nenhum texto for digitado, simplesmente nao fazemos nada.
-			// No futuro, podemos mostrar uma mensagem de erro dizendo que 
-			// o campo eh obrigatorio.
-			if (name.isEmpty())
-				return;
-			
-			// Verifica se já existe um livro com o mesmo nome já cadastrado
-			// Caso não encontre nenhum ele insere no banco de dados e na tabela da view.
-			if(BookController.getInstance().checkBook(listBooks, name)) {
-				BookController.getInstance().createBook(name);
-				
-				listBooks.add( BookController.getInstance().addBooks(listBooks.size()+1, name));
-				
-				Object[] record = new Object[] { listBooks.size(), name };
-				records.addRow(record);
-			}
-			
-			// Limpa todos os campos
-			txtBooksName.setText(null);
+			currentState.onSave(instance);
 		}
 	}
 }
