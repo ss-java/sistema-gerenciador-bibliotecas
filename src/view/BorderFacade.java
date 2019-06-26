@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.PopupMenu;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 

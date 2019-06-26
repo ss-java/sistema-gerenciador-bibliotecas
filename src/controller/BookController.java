@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.Book;
 import model.DatabaseConnection;
@@ -31,6 +32,35 @@ public class BookController {
 		Book book = new Book();
 		book.setName(name);
 		book.save();
+	}
+	
+	/**
+	 * 
+	 * Checks if the book you want to insert into the database is already registered.
+	 */
+	
+	public boolean checkBook(ArrayList<Book> l, String nameBook) {
+		for(Book book : l) {
+			if(book.getName().equals(nameBook)) {
+				System.out.println("Livro j� cadastrado");
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	/** 
+	 * A method that assists in the insertion of new books. 
+	 */
+	
+	public Book addBooks(int id, String name) {
+		Book book = new Book();
+	
+		book.setId(id);
+		book.setName(name);
+	
+		return book;
 	}
 
 	public ResultSet getAllBooks() {

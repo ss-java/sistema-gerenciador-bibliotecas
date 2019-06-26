@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.BookController;
+import model.Book;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -45,14 +47,16 @@ public class BooksWindow extends JFrame {
 	 * alterada, automaticamente atualizara a tabela de 
 	 * dados.
 	 */
-	private DefaultTableModel records = new DefaultTableModel();
-	
+	private DefaultTableModel records = new DefaultTableModel();	
+	private ArrayList<Book> listBooks = new ArrayList<>();
+
 	/**
 	 * Objetos para o State Pattern
 	 */
 	WindowState currentState;
 	BooksWindow instance;
-	/**
+
+  /**
 	 * Metodo chamado por outras classes sempre que 
 	 * elas desejam abrir essa janela.
 	 */
@@ -190,6 +194,9 @@ public class BooksWindow extends JFrame {
 		ResultSet data = BookController.getInstance().getAllBooks();
 		try {
 			while (data.next()) {
+				
+				listBooks.add( BookController.getInstance().addBooks(data.getInt("id"), data.getString("name")));
+				
 				Object[] record = new Object[] { data.getInt("id"), data.getString("name") };
 				records.addRow(record);
 			}
@@ -207,12 +214,13 @@ public class BooksWindow extends JFrame {
 		if (name.isEmpty())
 			return;
 		
-		BookController.getInstance().createBook(name);
+    if (BookController.getInstance().checkBook(listBooks, name)) {
+      BookController.getInstance().createBook(name);
+
+      // Limpa todos os campos
+      txtBooksName.setText(null);
 		
-		// Limpa todos os campos
-		txtBooksName.setText(null);
-		
-		new BooksWindow().populateDataTable();
+  		populateDataTable();
 	}
 	
 	/*
@@ -222,7 +230,6 @@ public class BooksWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			currentState.onSave(instance);
-			
 		}
 	}
 }
