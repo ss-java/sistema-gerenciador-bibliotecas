@@ -214,13 +214,14 @@ public class BooksWindow extends JFrame {
 		if (name.isEmpty())
 			return;
 		
-    if (BookController.getInstance().checkBook(listBooks, name)) {
-      BookController.getInstance().createBook(name);
-
-      // Limpa todos os campos
-      txtBooksName.setText(null);
-		
-  		populateDataTable();
+	    if (BookController.getInstance().checkBook(listBooks, name)) {
+	      BookController.getInstance().createBook(name);
+	
+	      // Limpa todos os campos
+	      txtBooksName.setText(null);
+			
+	  		populateDataTable();
+		}
 	}
 	
 	/*

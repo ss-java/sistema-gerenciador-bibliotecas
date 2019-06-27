@@ -83,7 +83,7 @@ public class CustomersWindow extends JFrame {
 	}
 
 	private void buildWindowContainer() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 600);
 		windowPanel = new JPanel();
 		windowPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -185,7 +185,7 @@ public class CustomersWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			state.OnSave(instance);
+			state.onSave(instance);
 		}
 	}
 
@@ -194,7 +194,7 @@ public class CustomersWindow extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			state.setState(new CustomersCreateWindowState());
 
-			state.OnSave(instance);
+			state.onSave(instance);
 		}
 	}
 		
@@ -203,7 +203,7 @@ public class CustomersWindow extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			state.setState(new CustomersEditWindowState());
 
-			state.OnSave(instance);
+			state.onSave(instance);
 		}
 	}
 	

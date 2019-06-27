@@ -21,8 +21,8 @@ public class WindowCustomersState implements WindowState {
 		this.currentState = s;
 	}
 	
-	public void OnSave(JFrame stateOwner) {
-		this.currentState.OnSave(stateOwner);
+	public void onSave(JFrame stateOwner) {
+		this.currentState.onSave(stateOwner);
 	}
 
 }

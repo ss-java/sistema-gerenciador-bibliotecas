@@ -3,6 +3,6 @@ package view;
 import javax.swing.JFrame;
 
 public interface WindowState {	
-	public void OnSave(JFrame stateOwner);
+	public void onSave(JFrame stateOwner);
 
 }

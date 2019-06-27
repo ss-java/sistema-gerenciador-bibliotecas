@@ -85,7 +85,7 @@ public class LoansWindow extends JFrame {
 	}
 	
 	private void buildWindowContainer() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -249,7 +249,7 @@ public class LoansWindow extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			if (books.isEmpty() || customers.isEmpty()) {
-				System.out.println("Livro ou cliente não selecionado!");
+				System.out.println("Livro ou cliente nï¿½o selecionado!");
 				return;				
 			}
 							
