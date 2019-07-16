@@ -25,5 +25,14 @@ Se você faz parte do time de desenvolvimento, comece lendo a [Wiki](https://git
 4. Cada membro precisa ser **completamente** capaz de explicar suas implementações. Isso incluir dizer quais padrões implementou, quais os ganhos desses padrões e quais os custos identificados.
 
 ## 3. Observações
-### 3.1. Os padrões podem ser implementados numa forma mais básica
-Como o projeto é pequeno e o seu maior intuito é permitir que o grupo inteiro aprenda mais sobre Padrões de Projeto, as implementações podem não ser completamente fiéis ou até mesmo não serem as mais ideais para cada problema. O principal intuito era prover uma introdução aos padrões, garantindo que cada desenvolvedor entendesse a sua necessidade após "viver o problema".
+### 3.1. Os padrões podem ter uma implementação mais simplista
+Como o projeto é pequeno e o seu maior intuito é permitir que o grupo inteiro aprenda mais sobre Design Patterns, as implementações podem não ser completamente fiéis ou até mesmo não serem as mais ideais para cada problema. Para melhorar o aprendizado da equipe, primeiro fizemos as implementações com vários _bad smells_. Os padrões foram implementados em seguida.
+
+Usamos esse raciocínio porque antes de entender uma solução, o seu time precisa viver o problema. Sentir na pele. Só então as soluções passam a fazer sentido.
+
+## 4. Resultado final
+### 4.1. Nota final
+O trabalho recebeu nota máxima, **20 pontos**. Um agradecimento especial aos desenvolvedores envolvidos, [Jefferson Gomes](https://github.com/jprogram), [Marcos](https://github.com/MarcosHGA) e [Paulo Trindade](https://github.com/paulotrindade1). Dedicaram-se à aprender os padrões e deram o seu melhor. :star2:
+
+### 4.2. Sobre o histórico do desenvolvimento
+Caso tenha interesse em visualizar o histórico do desenvolvimento, consulte a seção de [Issues](https://github.com/ss-java/sistema-gerenciador-bibliotecas/issues) e [Pull Requests](https://github.com/ss-java/sistema-gerenciador-bibliotecas/pulls). Lembre-se também de checar a aba _Closed_, pois muitos deles foram fechados após serem finalizados.
